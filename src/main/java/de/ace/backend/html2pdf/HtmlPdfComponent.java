@@ -17,9 +17,11 @@ public interface HtmlPdfComponent {
 
         PrintOptions printOptions = new PrintOptions();
         printOptions.setBackground(true);
-        driver.print(printOptions);
+        var pdf = driver.print(printOptions);
 
-        return java.util.Base64.getDecoder().decode(driver.print(printOptions).getContent());
+        //driver.quit(); Causes crash. We need a better way to clean up memory
+
+        return java.util.Base64.getDecoder().decode(pdf.getContent());
     }
 
     void renderProcess(ChromeDriver driver, String data) throws InterruptedException;
