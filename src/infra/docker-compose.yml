@@ -1,0 +1,23 @@
+version: '3'
+services:
+  # Spring Boot application service
+  seleniarm:
+    image: seleniarm/standalone-chromium:latest
+    ports:
+      - "4444:4444"
+      - "5901:5900"
+      - "7900:7900"
+    networks:
+      - my-network
+  spring-boot-app:
+    container_name: DavidPDF
+    build:
+      context: ../../
+      dockerfile: src/infra/Dockerfile
+    ports:
+      - "8080:8080"
+    networks:
+      - my-network
+networks:
+  my-network:
+    driver: bridge

@@ -9,6 +9,7 @@ public class UrlComponent implements HtmlPdfComponent {
     @Override
     public void renderProcess(ChromeDriver driver, String data) throws InterruptedException {
         driver.get(data);
+        //This is a joke
         Thread.sleep(1000);
     }
 }
