@@ -1,4 +1,4 @@
-package de.ace.backend.html2pdf;
+package dev.misei.html2pdf;
 
 import org.openqa.selenium.PrintsPage;
 import org.openqa.selenium.WebDriver;
@@ -37,7 +37,7 @@ public interface HtmlPdfComponent {
         printOptions.setBackground(true);
         var pdf = ((PrintsPage) driver).print(printOptions);
 
-        if(driver instanceof RemoteWebDriver remoteWebDriver) {
+        if (driver instanceof RemoteWebDriver remoteWebDriver) {
             remoteWebDriver.quit();
         }
 

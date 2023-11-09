@@ -1,4 +1,4 @@
-package de.ace.backend.html2pdf;
+package dev.misei.html2pdf;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
@@ -9,32 +9,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.OutputStream;
 
 /**
- * To be used locally. This requires that you double click on the chromedriver and that this driver is compatible
- * with your Chrome version
+ * To be used with Docker. This requires that you build, compile and use docker-compose
  */
 @Controller
-@RequestMapping("/local")
+@RequestMapping("/docker")
 @AllArgsConstructor
-public class ApiLocalController {
+public class ApiDockerController {
 
+    public static final String SELENIARM = "http://seleniarm:4444";
     public final HtmlPdfComponent urlComponent;
     public final HtmlPdfComponent dataComponent;
-    public final File file = new File("chromedriver");
 
     @GetMapping("/generatePdfUrl")
     public void generatePdfUrl(@RequestParam String url, HttpServletResponse response) throws Exception {
-        responseWith(urlComponent.render(url, HtmlPdfComponent.createLocalDriver(file.getAbsolutePath())),
+        responseWith(urlComponent.render(url, HtmlPdfComponent.createRemoteDriver(SELENIARM)),
                 response);
     }
 
     @GetMapping("/generatePdfHtml")
     public void generatePdfHtml(@RequestBody String htmlData, HttpServletResponse response) throws Exception {
-        responseWith(dataComponent.render(htmlData, HtmlPdfComponent.createLocalDriver(file.getAbsolutePath())),
+        responseWith(dataComponent.render(htmlData, HtmlPdfComponent.createRemoteDriver(SELENIARM)),
                 response);
     }
 
