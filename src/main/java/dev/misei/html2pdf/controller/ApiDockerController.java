@@ -1,5 +1,6 @@
-package dev.misei.html2pdf;
+package dev.misei.html2pdf.controller;
 
+import dev.misei.html2pdf.application.PdfRenderComponent;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,33 +19,22 @@ import java.io.OutputStream;
 @Controller
 @RequestMapping("/docker")
 @AllArgsConstructor
-public class ApiDockerController {
+public class ApiDockerController implements ApiController {
 
     public static final String SELENIARM = "http://seleniarm:4444";
-    public final HtmlPdfComponent urlComponent;
-    public final HtmlPdfComponent dataComponent;
+    public final PdfRenderComponent urlComponent;
+    public final PdfRenderComponent dataComponent;
 
     @GetMapping("/generatePdfUrl")
     public void generatePdfUrl(@RequestParam String url, HttpServletResponse response) throws Exception {
-        responseWith(urlComponent.render(url, HtmlPdfComponent.createRemoteDriver(SELENIARM)),
+        responseWith(urlComponent.render(url, PdfRenderComponent.createRemoteDriver(SELENIARM)),
                 response);
     }
 
     @GetMapping("/generatePdfHtml")
     public void generatePdfHtml(@RequestBody String htmlData, HttpServletResponse response) throws Exception {
-        responseWith(dataComponent.render(htmlData, HtmlPdfComponent.createRemoteDriver(SELENIARM)),
+        responseWith(dataComponent.render(htmlData, PdfRenderComponent.createRemoteDriver(SELENIARM)),
                 response);
-    }
-
-    private void responseWith(byte[] renderedPdf, HttpServletResponse response) throws IOException {
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "attachment; filename=output.pdf");
-
-        try (ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
-             OutputStream responseStream = response.getOutputStream()) {
-            byteStream.write(renderedPdf);
-            byteStream.writeTo(responseStream);
-        }
     }
 
 }

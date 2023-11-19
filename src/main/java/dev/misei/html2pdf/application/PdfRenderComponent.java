@@ -1,9 +1,10 @@
-package dev.misei.html2pdf;
+package dev.misei.html2pdf.application;
 
 import org.openqa.selenium.PrintsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.print.PageSize;
 import org.openqa.selenium.print.PrintOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
@@ -11,7 +12,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public interface HtmlPdfComponent {
+public interface PdfRenderComponent {
 
     static ChromeDriver createLocalDriver(String chromeDriverPath) {
         System.setProperty("webdriver.chrome.driver", chromeDriverPath);

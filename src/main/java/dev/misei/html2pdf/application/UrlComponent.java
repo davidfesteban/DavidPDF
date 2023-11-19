@@ -1,10 +1,9 @@
-package dev.misei.html2pdf;
-
+package dev.misei.html2pdf.application;
 import org.openqa.selenium.WebDriver;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UrlComponent implements HtmlPdfComponent {
+public class UrlComponent implements PdfRenderComponent {
     @Override
     public void renderProcess(WebDriver driver, String data) throws InterruptedException {
         driver.get(data);
