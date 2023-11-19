@@ -1,7 +1,0 @@
-dev/misei/html2pdf/MagicApplication.class
-dev/misei/html2pdf/controller/ApiController.class
-dev/misei/html2pdf/controller/ApiLocalController.class
-dev/misei/html2pdf/application/UrlComponent.class
-dev/misei/html2pdf/application/PdfRenderComponent.class
-dev/misei/html2pdf/controller/ApiDockerController.class
-dev/misei/html2pdf/application/DataComponent.class
