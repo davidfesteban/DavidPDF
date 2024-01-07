@@ -46,7 +46,7 @@ public class ApiDockerController implements ApiController {
     @GetMapping("/generatePdfHtml")
     public void generatePdfHtml(@RequestBody String htmlData, HttpServletResponse response) throws Exception {
         //temporary:
-        if (!Optional.ofNullable(response.getHeader("Authorization")).orElse("").equals(String.format("Bearer %s", apiKey))) {
+        if (Optional.ofNullable(response.getHeader("Authorization")).orElse("").equals(String.format("Bearer %s", apiKey))) {
             response.sendError(418, "Bad Auth");
             return;
         }
