@@ -15,7 +15,7 @@ services:
       context: ../../
       dockerfile: src/infra/Dockerfile
     ports:
-      - "80:8080"
+      - "8080:8080"
     networks:
       - my-network
 networks:

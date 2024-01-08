@@ -37,7 +37,7 @@ public interface PdfRenderComponent {
         PrintOptions printOptions = new PrintOptions();
         printOptions.setBackground(true);
         var pdf = ((PrintsPage) driver).print(printOptions);
-
+        System.out.println("PDF generated");
         if (driver instanceof RemoteWebDriver remoteWebDriver) {
             remoteWebDriver.quit();
         }

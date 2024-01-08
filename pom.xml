@@ -14,7 +14,7 @@
     <name>HTML2PDF - Java</name>
     <description>HTML 2 PDF Microservice</description>
     <properties>
-        <java.version>20</java.version>
+        <java.version>21</java.version>
     </properties>
     <dependencies>
         <dependency>
