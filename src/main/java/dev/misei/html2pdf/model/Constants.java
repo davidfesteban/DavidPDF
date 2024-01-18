@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Constants {
 
-    public static final String SELENIARM = "http://seleniarm:4444";
+    public static final String SELENIARM = "http://localhost:4444";
     public static final int WEBDRIVER_WAIT_TIMEOUT_IN_SECONDS = 5;
     public static String apiKey;
 
