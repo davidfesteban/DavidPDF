@@ -19,7 +19,6 @@ public interface PdfRenderComponent {
         ChromeOptions chromeOptions = new ChromeOptions()
                 .addArguments("--headless", "--disable-gpu",
                         "--run-all-compositor-stages-before-draw", "--remote-allow-origins=*", "--allow-http-background-page");
-
         return new ChromeDriver(chromeOptions);
     }
 
