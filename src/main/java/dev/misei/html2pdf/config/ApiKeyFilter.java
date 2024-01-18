@@ -18,9 +18,9 @@ public class ApiKeyFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain)
             throws ServletException, IOException {
-        String apiKey = request.getHeader("Bearer");
+        String apiKey = request.getHeader("Authorization");
 
-        if (nonNull(apiKey) && apiKey.equals(Constants.apiKey)) {
+        if (nonNull(apiKey) && apiKey.equals("Bearer " + Constants.apiKey)) {
             filterChain.doFilter(request, response);
         } else {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());
