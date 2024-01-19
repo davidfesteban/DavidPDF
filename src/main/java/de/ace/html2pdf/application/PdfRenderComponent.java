@@ -1,6 +1,6 @@
-package dev.misei.html2pdf.application;
+package de.ace.html2pdf.application;
 
-import dev.misei.html2pdf.model.RenderType;
+import de.ace.html2pdf.model.RenderType;
 import org.openqa.selenium.PrintsPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -30,6 +30,7 @@ public interface PdfRenderComponent {
     }
 
     default byte[] render(String data, WebDriver driver, RenderType renderType) {
+        checkForFooterTag(data);
         renderProcess(driver, data, renderType);
 
         PrintOptions printOptions = new PrintOptions();
@@ -42,6 +43,8 @@ public interface PdfRenderComponent {
 
         return java.util.Base64.getDecoder().decode(pdf.getContent());
     }
+
+    void checkForFooterTag(String data);
 
     void renderProcess(WebDriver driver, String data, RenderType renderType);
 

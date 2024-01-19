@@ -1,4 +1,4 @@
-package dev.misei.html2pdf.config;
+package de.ace.html2pdf.config;
 
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;

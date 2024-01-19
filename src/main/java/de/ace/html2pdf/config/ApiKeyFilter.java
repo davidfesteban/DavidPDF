@@ -1,6 +1,6 @@
-package dev.misei.html2pdf.config;
+package de.ace.html2pdf.config;
 
-import dev.misei.html2pdf.model.Constants;
+import de.ace.html2pdf.model.Constants;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

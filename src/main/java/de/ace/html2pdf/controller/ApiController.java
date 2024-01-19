@@ -1,6 +1,7 @@
-package dev.misei.html2pdf.controller;
+package de.ace.html2pdf.controller;
 
-import dev.misei.html2pdf.application.PdfRenderComponent;
+import de.ace.html2pdf.model.RenderType;
+import de.ace.html2pdf.application.PdfRenderComponent;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
@@ -13,9 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.net.MalformedURLException;
 import java.net.URISyntaxException;
 
-import static dev.misei.html2pdf.model.Constants.SELENIARM;
-import static dev.misei.html2pdf.model.RenderType.TYPE_DATA;
-import static dev.misei.html2pdf.model.RenderType.TYPE_URL;
+import static de.ace.html2pdf.model.Constants.SELENIARM;
 
 /**
  * To be used with Docker. This requires that you build, compile and use docker-compose
@@ -35,12 +34,12 @@ public class ApiController {
 
     @GetMapping("/generatePdfUrl")
     public ResponseEntity<byte[]> generatePdfUrl(@RequestParam String url) throws MalformedURLException, URISyntaxException {
-        return new ResponseEntity<>(renderComponent.render(url, PdfRenderComponent.createRemoteDriver(SELENIARM), TYPE_URL), pdfContentTypeHeader(), HttpStatus.OK);
+        return new ResponseEntity<>(renderComponent.render(url, PdfRenderComponent.createRemoteDriver(SELENIARM), RenderType.TYPE_URL), pdfContentTypeHeader(), HttpStatus.OK);
     }
 
     @PostMapping("/generatePdfHtml")
     public ResponseEntity<byte[]> generatePdfHtml(@RequestBody String htmlData) throws MalformedURLException, URISyntaxException {
-        return new ResponseEntity<>(renderComponent.render(htmlData, PdfRenderComponent.createRemoteDriver(SELENIARM), TYPE_DATA), pdfContentTypeHeader(), HttpStatus.OK);
+        return new ResponseEntity<>(renderComponent.render(htmlData, PdfRenderComponent.createRemoteDriver(SELENIARM), RenderType.TYPE_DATA), pdfContentTypeHeader(), HttpStatus.OK);
     }
 
     private HttpHeaders pdfContentTypeHeader() {

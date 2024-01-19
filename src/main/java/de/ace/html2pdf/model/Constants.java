@@ -1,4 +1,4 @@
-package dev.misei.html2pdf.model;
+package de.ace.html2pdf.model;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
