@@ -6,12 +6,11 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
-
-import static java.util.Objects.nonNull;
 
 public class ApiKeyFilter extends OncePerRequestFilter {
 
@@ -20,7 +19,7 @@ public class ApiKeyFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String apiKey = request.getHeader("Authorization");
 
-        if (nonNull(apiKey) && apiKey.equals("Bearer " + Constants.apiKey)) {
+        if (request.getRequestURI().contains("/healthCheck") || StringUtils.equals(apiKey, "Bearer " + Constants.apiKey)) {
             filterChain.doFilter(request, response);
         } else {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());

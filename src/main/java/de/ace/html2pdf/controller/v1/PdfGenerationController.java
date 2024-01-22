@@ -1,4 +1,4 @@
-package de.ace.html2pdf.controller;
+package de.ace.html2pdf.controller.v1;
 
 import de.ace.html2pdf.model.RenderType;
 import de.ace.html2pdf.application.PdfRenderComponent;
@@ -8,7 +8,6 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.MalformedURLException;
@@ -19,11 +18,11 @@ import static de.ace.html2pdf.model.Constants.SELENIARM;
 /**
  * To be used with Docker. This requires that you build, compile and use docker-compose
  */
-@Controller
-@RequestMapping("/docker")
 @Slf4j
+@RestController
+@RequestMapping("/pdf")
 @RequiredArgsConstructor
-public class ApiController {
+public class PdfGenerationController {
 
     public final PdfRenderComponent renderComponent;
 
@@ -32,12 +31,12 @@ public class ApiController {
         return ResponseEntity.ok("Ok");
     }
 
-    @GetMapping("/generatePdfUrl")
+    @GetMapping("/url")
     public ResponseEntity<byte[]> generatePdfUrl(@RequestParam String url) throws MalformedURLException, URISyntaxException {
         return new ResponseEntity<>(renderComponent.render(url, PdfRenderComponent.createRemoteDriver(SELENIARM), RenderType.TYPE_URL), pdfContentTypeHeader(), HttpStatus.OK);
     }
 
-    @PostMapping("/generatePdfHtml")
+    @PostMapping("/html")
     public ResponseEntity<byte[]> generatePdfHtml(@RequestBody String htmlData) throws MalformedURLException, URISyntaxException {
         return new ResponseEntity<>(renderComponent.render(htmlData, PdfRenderComponent.createRemoteDriver(SELENIARM), RenderType.TYPE_DATA), pdfContentTypeHeader(), HttpStatus.OK);
     }

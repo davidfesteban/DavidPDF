@@ -12,7 +12,7 @@ public class SecurityConfig {
     public FilterRegistrationBean<ApiKeyFilter> apiKeyFilter() {
         FilterRegistrationBean<ApiKeyFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(new ApiKeyFilter());
-        registrationBean.addUrlPatterns("/docker/*");
+        registrationBean.addUrlPatterns("/*");
         return registrationBean;
     }
 }
