@@ -30,7 +30,7 @@ public interface PdfRenderComponent {
     }
 
     default byte[] render(String data, WebDriver driver, RenderType renderType) {
-        checkForFooterTag(data);
+        data = fixFooterTag(data, renderType);
         renderProcess(driver, data, renderType);
 
         PrintOptions printOptions = new PrintOptions();
@@ -44,7 +44,7 @@ public interface PdfRenderComponent {
         return java.util.Base64.getDecoder().decode(pdf.getContent());
     }
 
-    void checkForFooterTag(String data);
+    String fixFooterTag(String data, RenderType renderType);
 
     void renderProcess(WebDriver driver, String data, RenderType renderType);
 
