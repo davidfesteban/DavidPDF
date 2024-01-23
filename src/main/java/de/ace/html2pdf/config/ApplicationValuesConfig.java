@@ -14,7 +14,7 @@ public class ApplicationValuesConfig {
     }
 
     @Autowired
-    public void setWebDriverPath(@Value("${selenium-web-driver-path}") String path) {
+    public void setWebDriverPath(@Value("${selenium.driver-path}") String path) {
         Constants.setWebDriverPath(path);
     }
 }
