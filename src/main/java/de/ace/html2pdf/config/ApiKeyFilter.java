@@ -19,7 +19,7 @@ public class ApiKeyFilter extends OncePerRequestFilter {
             throws ServletException, IOException {
         String apiKey = request.getHeader("Authorization");
 
-        if (request.getRequestURI().contains("/healthCheck") || StringUtils.equals(apiKey, "Bearer " + Constants.apiKey)) {
+        if (request.getRequestURI().contains("/healthCheck") || StringUtils.equals(apiKey, "Bearer " + Constants.getApiKey())) {
             filterChain.doFilter(request, response);
         } else {
             response.setStatus(HttpStatus.UNAUTHORIZED.value());

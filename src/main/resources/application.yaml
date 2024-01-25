@@ -10,3 +10,5 @@ spring:
     compose:
       enabled: 'true'
       file: src/infra/docker-compose.yml
+selenium:
+  driver-path: "http://seleniarm:4444"
