@@ -1,26 +1,17 @@
 package de.ace.html2pdf.application;
 
 import de.ace.html2pdf.model.RenderType;
-import org.openqa.selenium.PrintsPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.print.PrintOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 
+import java.io.ByteArrayOutputStream;
 import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URISyntaxException;
 
-public interface PdfRenderComponent {
 
-    static ChromeDriver createLocalDriver(String chromeDriverPath) {
-        System.setProperty("webdriver.chrome.driver", chromeDriverPath);
-        ChromeOptions chromeOptions = new ChromeOptions()
-                .addArguments("--headless", "--disable-gpu",
-                        "--run-all-compositor-stages-before-draw", "--remote-allow-origins=*", "--allow-http-background-page");
-        return new ChromeDriver(chromeOptions);
-    }
+public interface PdfRenderComponent {
 
     static RemoteWebDriver createRemoteDriver(String url) throws URISyntaxException, MalformedURLException {
         ChromeOptions chromeOptions = new ChromeOptions()
@@ -29,22 +20,8 @@ public interface PdfRenderComponent {
         return new RemoteWebDriver(new URI(url).toURL(), chromeOptions);
     }
 
-    default byte[] render(String data, WebDriver driver, RenderType renderType) {
-        data = fixFooterTag(data, renderType);
-        renderProcess(driver, data, renderType);
+    String render(String data, RenderType renderType, ByteArrayOutputStream byteArrayOutputStream);
 
-        PrintOptions printOptions = new PrintOptions();
-        printOptions.setBackground(true);
-        var pdf = ((PrintsPage) driver).print(printOptions);
-        System.out.println("PDF generated");
-        if (driver instanceof RemoteWebDriver remoteWebDriver) {
-            remoteWebDriver.quit();
-        }
-
-        return java.util.Base64.getDecoder().decode(pdf.getContent());
-    }
-
-    String fixFooterTag(String data, RenderType renderType);
 
     void renderProcess(WebDriver driver, String data, RenderType renderType);
 
