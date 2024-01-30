@@ -1,4 +1,4 @@
-package dev.misei.html2pdf;
+package de.ace.html2pdf;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
